@@ -299,4 +299,304 @@ document.getElementById("result").style.display = "block";
 
 </body>
 </html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>*˖°🍀今日のうらない🍀*˖°</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:30px;
+    text-align:center;
+
+    color:#8b6b4a;
+
+    font-family:"Comic Sans MS","Hiragino Maru Gothic ProN","YuKyokasho","cursive";
+
+    background:
+    radial-gradient(#8b6b4a 2px, transparent 3px),
+    radial-gradient(#8b6b4a 2px, transparent 3px);
+
+    background-color:#dff4ff;
+
+    background-size:40px 40px;
+    background-position:0 0,20px 20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+}
+
+h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    margin-bottom:25px;
+    font-size:18px;
+}
+
+.card{
+
+    background:white;
+
+    border-radius:45px;
+
+    padding:30px;
+
+    border:6px solid rgba(255,255,255,0.9);
+
+    box-shadow:
+    0 0 0 8px #f5fbff,
+    0 0 0 16px rgba(255,255,255,0.9),
+    0 10px 25px rgba(0,0,0,0.08);
+}
+
+input{
+
+    width:80%;
+    max-width:350px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#f5fbff;
+
+    text-align:center;
+
+    font-size:18px;
+
+    color:#8b6b4a;
+
+    font-family:inherit;
+}
+
+.choice-title{
+    margin-top:25px;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.choices{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.choice{
+
+    font-size:35px;
+
+    background:white;
+
+    border:3px solid #cfefff;
+
+    border-radius:20px;
+
+    padding:10px 18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.choice:hover{
+    transform:scale(1.08);
+}
+
+.selected{
+    background:#fff7d6;
+}
+
+/* 💖ハートボタン */
+.heart-button{
+    margin-top:25px;
+
+    width:120px;
+    height:110px;
+
+    border:none;
+    cursor:pointer;
+
+    background:#ffd6e7;
+
+    clip-path: path("M60 100 C20 80 0 55 0 35 C0 15 15 0 35 0 C50 0 60 15 60 15 C60 15 70 0 85 0 C105 0 120 15 120 35 C120 55 100 80 60 100 Z");
+
+    font-size:18px;
+    font-weight:bold;
+    color:#8b6b4a;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+    transition:.2s;
+}
+
+.heart-button:hover{
+    transform:scale(1.08);
+    background:#ffc2dc;
+}
+
+.heart-button:active{
+    transform:scale(0.95);
+}
+
+.result{
+
+    display:none;
+
+    margin-top:30px;
+
+    background:white;
+
+    border-radius:45px;
+
+    padding:30px;
+
+    line-height:2;
+}
+
+.name{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+/* キラキラ */
+.sparkle{
+    position:fixed;
+    top:40%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size:40px;
+    z-index:9999;
+    animation: pop 1.2s ease;
+}
+
+@keyframes pop {
+0% { transform:translate(-50%, -50%) scale(0); opacity:0; }
+50% { transform:translate(-50%, -50%) scale(1.3); opacity:1; }
+100% { transform:translate(-50%, -50%) scale(0); opacity:0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>*˖°🍀今日のうらない🍀*˖°</h1>
+
+<div class="subtitle">
+今日の直感を信じて選んでみてね✨
+</div>
+
+<div class="card">
+
+<input type="text" id="name" placeholder="なまえ or ニックネーム"/>
+
+<div class="choice-title">
+どれかひとつ選んでね🪄
+</div>
+
+<div class="choices">
+
+<div class="choice" onclick="selectChoice(this)">🍒*˖°</div>
+<div class="choice" onclick="selectChoice(this)">☁✩⋆·̩͙</div>
+<div class="choice" onclick="selectChoice(this)">🤍𐙚</div>
+
+</div>
+
+<!-- 💖ハートボタン -->
+<button class="heart-button" onclick="showFortune()">
+占う
+</button>
+
+</div>
+
+<div class="result" id="result">
+
+<div class="name" id="displayName"></div>
+
+<div class="category" id="fortuneText"></div>
+
+<div class="category" style="margin-top:20px;font-weight:bold;">
+この画面を見た時点であなたは幸せになる事が決定いたしました🖐🏻𓂃꙳⋆
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let selected = "";
+
+const fortunes = [
+"🍀 健康運 ◎ 今日あなたは転びません🍀 自信を持ってモデルウォークなさってください✨",
+"💰 金運 ちょい⤵️ 無意識にも金が落ちてないか地面ばっか見て転ぶかもよ気をつけてくださいね💰",
+"📚 勉強運 〇 100点が取れる魔法かけときますね🪄✨",
+"🫰🏻 恋愛運 『全面的に愛することで愛される』ってなんか本に書いてあったから愛したらいいと思う❕",
+"⭐ 全体運 大吉 𝐇𝐚𝐯𝐞 𝐚 𝐧𝐢𝐜𝐞 𝐝𝐚𝐲.ᐟ.ᐟ⭐️"
+];
+
+function selectChoice(element){
+
+document.querySelectorAll(".choice")
+.forEach(el=>el.classList.remove("selected"));
+
+element.classList.add("selected");
+
+selected = element.innerText;
+
+}
+
+function showSparkle(){
+
+const div = document.createElement("div");
+div.className = "sparkle";
+div.innerHTML = "✨💖✨💖✨💖✨";
+
+document.body.appendChild(div);
+
+setTimeout(() => div.remove(), 1200);
+
+}
+
+function showFortune(){
+
+const name =
+document.getElementById("name").value || "あなた";
+
+const result =
+fortunes[Math.floor(Math.random() * fortunes.length)];
+
+document.getElementById("displayName").innerHTML =
+`${name} さんへの占い🧸⸝⋆*`;
+
+document.getElementById("fortuneText").innerHTML =
+result;
+
+if(result.includes("大吉")){
+    showSparkle();
+}
+
+document.getElementById("result").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
 
